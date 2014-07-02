@@ -66,15 +66,35 @@ add_action('login_form', 'done_button_redirect_to_front_page');
 
 /*
 */
-function done_button_change_session() {
+function done_button_login() {
     
+    if ( $device_session_id = done_button_get_device_session_id() ) {
+
+    	setcookie( "device_session_id_global", $device_session_id, time() + (10 * 365 * 24 * 60 * 60), home_url( '/', 'relative' ) );
+
+    }
+
     // Create a new device_session_id	
 	done_button_set_device_session_id();
 
 }
 
-add_action( 'wp_login', 'done_button_change_session' );
-add_action( 'wp_logout', 'done_button_change_session' );
+add_action( 'wp_login', 'done_button_login' );
+
+function done_button_logout() {
+
+	$device_session_id_global = isset($_COOKIE['device_session_id_global']) ? $_COOKIE['device_session_id_global'] : '';
+
+	// Create a new device_session_id	
+	done_button_set_device_session_id( $device_session_id_global );
+
+	if ( $device_session_id_global ) {
+		setcookie( "device_session_id_global", '', time() - 3600, home_url( '/', 'relative' ) );
+	}
+
+}
+
+add_action( 'wp_logout', 'done_button_logout' );
 
 /*
 */
@@ -209,9 +229,9 @@ function done_button_get_device_session_id() {
 
 /*
 */
-function done_button_set_device_session_id() {
+function done_button_set_device_session_id( $session_id = '' ) {
 
-	$device_session_id = md5( current_time('mysql') . $_SERVER['REMOTE_ADDR'] );
+	$device_session_id = ($session_id) ? $session_id : md5( current_time('mysql') . $_SERVER['REMOTE_ADDR'] );
 
 	setcookie( "device_session_id", $device_session_id, time() + (10 * 365 * 24 * 60 * 60), home_url( '/', 'relative' ) );
 
