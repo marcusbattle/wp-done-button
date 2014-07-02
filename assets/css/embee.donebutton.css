@@ -1,0 +1,29 @@
+.entry-content a.done-button,
+a.done-button {
+  background-color: lightslategrey;
+  color: #fff;
+  display: inline-block;
+  cursor: pointer;
+  text-decoration: none;
+  border-radius: 2px;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  padding: 0 15px;
+  line-height: 30px;
+  font-size: 14px;
+  text-transform: uppercase; }
+  .entry-content a.done-button .fa,
+  a.done-button .fa {
+    margin-right: 7px; }
+  .entry-content a.done-button:hover,
+  a.done-button:hover {
+    background-color: #3e4853; }
+  .entry-content a.done-button.disabled,
+  a.done-button.disabled {
+    background-color: #fff;
+    border: 2px solid lightslategrey;
+    color: lightslategrey; }
+    .entry-content a.done-button.disabled:hover,
+    a.done-button.disabled:hover {
+      cursor: default;
+      background-color: inherit; }
