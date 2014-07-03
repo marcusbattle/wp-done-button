@@ -109,7 +109,7 @@ function done_button_filter_content( $content ) {
 
 	if ( $done_button = done_button_is_pressed( $post->ID ) ) {
 
-		$post_read_date = human_time_diff( strtotime($done_button->date_created), current_time('timestamp') ) . ' ago';
+		$post_read_date = human_time_diff( strtotime($done_button->date_created) ) . ' ago';
 		$content .= "<p><a class=\"done-button disabled\" data-post-id=\"$post->ID\" disabled=\"true\"><i class=\"fa fa-check-circle-o fa-lg\"></i> <span>Read $post_read_date</span></a></p>";
 
 	} else {
